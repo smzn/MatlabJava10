@@ -9,8 +9,9 @@ public class MatlabJava10_main {
 		double data_transition[][] = {{ 0.25, 0.25, 0.5, 0 }, { 0, 0.25, 0.5, 0.25 }, { 0.25, 0.25, 0.25, 0.25 }, { 0.25, 0.25, 0, 0.5}};
 		MatlabJava10_lib mlib = new MatlabJava10_lib(data_transition);
 		
+		double initial[] = {0.25, 0.25, 0.25, 0.25};
 		double n = 2.0;
-		double [][] transition = mlib.getTransition(n);
+		double [][] transition = mlib.getTransition(n, initial);
 		System.out.println("Transition("+ n + ") = "+Arrays.deepToString(transition));
 	}
 

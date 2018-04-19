@@ -32,11 +32,12 @@ public class MatlabJava10_lib {
 	//https://jp.mathworks.com/help/matlab/ref/mpower.html
 	//https://jp.mathworks.com/help/econ/create-and-modify-markov-chain-model-objects.html
 	//https://jp.mathworks.com/help/econ/visualize-markov-chain-structure-and-evolution.html
-	public double [][] getTransition(double n) {
+	public double [][] getTransition(double n, double[] initial) {
 		double[][] outputs = null;
 		try {
 			ml.putVariableAsync("data", data);
 			ml.putVariableAsync("n", n);
+			ml.putVariableAsync("initial", initial);
 			ml.eval("c = data ^ n;");
 			//推移確率行列の可視化(有向グラフ)
 			ml.eval("mc = dtmc(c);");
@@ -57,7 +58,8 @@ public class MatlabJava10_lib {
 			//定常分布のシミュレーション
 			ml.eval("mc0 = dtmc(data);");
 			ml.eval("numSteps = 5;");
-			ml.eval("pi0 = [0.25 0.25 0.25 0.25];");
+			ml.eval("pi0 = initial;");
+			//ml.eval("pi0 = [0.25 0.25 0.25 0.25];");
 			ml.eval("pi_n = redistribute(mc0,numSteps,'X0',pi0);");
 			ml.eval("distplot(mc0,pi_n);");
 			ml.eval("saveas(gcf,'distplot(mc0).png');");
