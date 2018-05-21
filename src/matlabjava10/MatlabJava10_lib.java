@@ -57,7 +57,7 @@ public class MatlabJava10_lib {
 			ml.eval("pause(5);");
 			//定常分布のシミュレーション
 			ml.eval("mc0 = dtmc(data);");
-			ml.eval("numSteps = 5;");
+			ml.eval("numSteps = 33;");
 			ml.eval("pi0 = initial;");
 			//ml.eval("pi0 = [0.25 0.25 0.25 0.25];");
 			ml.eval("pi_n = redistribute(mc0,numSteps,'X0',pi0);");
@@ -92,5 +92,10 @@ public class MatlabJava10_lib {
 		return outputs;
 	}
 
+	public double getDifference(double[] end, double stationary[]) {
+		double differ = 0;
+		for(int i = 0; i < end.length; i++) differ += Math.pow(end[i] - stationary[i], 2);
+		return differ;
+	}
 
 }
